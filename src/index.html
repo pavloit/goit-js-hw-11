@@ -8,15 +8,22 @@
   </head>
   <body>
     <header>
+      <div class="container">
       <form class="search-form" id="search-form">
-  <input
-    type="text"
-    name="searchQuery"
-    autocomplete="off"
-    placeholder="Search images..."
-  />
-  <button type="submit">Search</button>
-</form>
+        <input
+          class="search-input"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+        <button class="submit-btn" type="submit">
+          <svg class="search" width="20" height="20" aria-label="search">
+            <use class="icon" href="./img/search.svg#icon-search"></use>
+          </svg>
+        </button>
+      </form>
+      </div>
     </header>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
     <!-- <include src="./partials/example.html"></include> -->
