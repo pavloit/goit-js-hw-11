@@ -28,7 +28,6 @@ async function galery(q, p = 1, pp = 40) {
   page = p;
   const galleryItems = await axios.get(`?key=${API_KEY}&q=${q}&page=${page}&per_page=${pp}`)
   const hits = galleryItems.data.hits;
-console.log(galleryItems);
   return markup(hits);
 }
 
@@ -45,26 +44,12 @@ function onSubmit(event) {
   }
 
   searchWord = selectors.searchInput.value;
-  console.log(selectors.searchInput.value);
   selectors.searchInput.value = "";
   return galery(searchWord);
 }
 
 
 function markup(arr) {
-  arr2 = []
-  arr.map(({ tags, likes, views, comments, downloads, largeImageURL, previewURL }) => console.log(
-    `Likes: ${likes}\nView: ${views}\nComments ${comments}\nDownloads: ${downloads}\nlargeImageURL: ${largeImageURL}\nPreviewURL: ${previewURL}\nTags: ${tags}\n`));
-  
-  arr.map(({ tags, likes, views, comments, downloads, largeImageURL, previewURL }) => arr2.push({
-    likes,
-    views,  
-    comments,
-    downloads,
-    largeImageURL,
-    previewURL, 
-    tags
-  }))
   
   selectors.gallery.insertAdjacentHTML('beforeend', `${arr.map(({ tags, likes, views, comments, downloads, largeImageURL, previewURL}) => `
       <div class="photo-card">
