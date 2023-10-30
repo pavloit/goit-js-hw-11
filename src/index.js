@@ -14,21 +14,51 @@ const selectors = {
   body: document.querySelector('body'),
   like: document.querySelector('.heart'),
   searchInput: document.querySelector('.search-input'),
-  loadBtn: document.querySelector(".load-more")
+  loadBtn: document.querySelector(".load")
 };
 
 let searchWord = "";
 let page = 1;
 
-
+selectors.loadBtn.classList.add('dn')
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 
 async function galery(q, p = 1, pp = 40) {
-  page = p;
-  const galleryItems = await axios.get(`?key=${API_KEY}&q=${q}&page=${page}&per_page=${pp}`)
+  const settings = {
+    params: {
+      key: API_KEY,
+      q,
+      page: p,
+      per_page: pp,
+      image_type: 'photo',
+      orientation: 'horizontal',
+      safesearch: 'true'
+    },
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }
+  const galleryItems = await axios.get('', settings)
   const hits = galleryItems.data.hits;
-  return markup(hits);
+  const totalHits = galleryItems.data.totalHits  
+  
+  if (p == 1) {
+  Notify.success(`Hooray! We found ${totalHits} "${q}" images.`)
+}  
+
+  if (hits.length === 0) {
+    return Notify.warning("Sorry, there are no images matching your search query. Please try again.")
+  }
+ 
+  if (hits.length === pp && p * pp < totalHits) {
+    console.log(galleryItems);
+    selectors.loadBtn.classList.remove('dn')
+    return markup(hits);
+}
+   selectors.loadBtn.classList.add('dn')
+   markup(hits);
+   return Notify.warning("We're sorry, but you've reached the end of search results.")
 }
 
 selectors.form.addEventListener('submit', onSubmit)
@@ -36,20 +66,24 @@ selectors.form.addEventListener('submit', onSubmit)
 
 function onSubmit(event) {
   event.preventDefault();
-  if (!selectors.searchInput.value) {
+  const query = selectors.searchInput.value
+  if (!query) {
     return Notify.warning('Please enter some keyword to search images!')
   }
-  if (selectors.searchInput.value != searchWord) {
-    selectors.gallery.innerHTML = ''
+  if (query == searchWord) {
+    selectors.searchInput.value = "";
+    return Notify.warning(`You are already searching for "${query}"`)
   }
-
-  searchWord = selectors.searchInput.value;
+  selectors.gallery.innerHTML = '';
+  page = 1;
+  searchWord = query;
   selectors.searchInput.value = "";
   return galery(searchWord);
 }
 
 
 function markup(arr) {
+  console.log(arr);
   
   selectors.gallery.insertAdjacentHTML('beforeend', `${arr.map(({ tags, likes, views, comments, downloads, largeImageURL, previewURL}) => `
       <div class="photo-card">
@@ -84,11 +118,9 @@ new SimpleLightbox('.gallery a', {
 selectors.loadBtn.addEventListener('click', onClick)
 
 function onClick() {
-  if (!searchWord) {
-    return
-  }
+ 
   page += 1;
   return galery(searchWord, page)
 }
 
-  
+

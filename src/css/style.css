@@ -5,6 +5,12 @@
 
 body {
     min-width: 340px;
+    background-image: 
+            url("../img/flowers-g2a236f70e_1280.png");
+
+    
+        
+   
 }
 
 
@@ -72,6 +78,7 @@ header {
 
 .gallery-section {
     margin-top: 67px;
+    margin-bottom: 30px;
 }
 
 
@@ -92,12 +99,14 @@ header {
     list-style: none;
     margin-left: auto;
     margin-right: auto;
+    
 }
 
 .photo-card {
     position: relative;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
         0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    background-color: rgba(245, 241, 217, 0.88);
 }
 
 .gallery__image:hover {
@@ -107,6 +116,7 @@ header {
 .gallery__image {
     height: 85%;
     width: 100%;
+    background-color: rgba(244, 242, 230, 0.8);
     object-fit: cover;
     transition: transform var(--animation-duration) var(--timing-function);
 }
@@ -147,17 +157,17 @@ header {
     background-color: rgba(26, 24, 6, 0.399) !important;
 }
 
-/* .is-hidden {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-} */
+.dn {
+    display: none;
+}
 
 .load-more {
     display: block;
     margin-top: 1.25rem;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
     width: 9.375rem;
     padding: .625rem;
 }
+
