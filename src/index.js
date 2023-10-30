@@ -14,13 +14,12 @@ const selectors = {
   body: document.querySelector('body'),
   like: document.querySelector('.heart'),
   searchInput: document.querySelector('.search-input'),
-  loadBtn: document.querySelector(".load")
+  loadDiv: document.querySelector(".load"),
+  loadBtn: document.querySelector(".load-more")
 };
 
 let searchWord = "";
 let page = 1;
-
-selectors.loadBtn.classList.add('dn')
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 
@@ -43,7 +42,7 @@ async function galery(q, p = 1, pp = 40) {
   const hits = galleryItems.data.hits;
   const totalHits = galleryItems.data.totalHits  
   
-  if (p == 1) {
+  if (p == 1 && hits.length > 0) {
   Notify.success(`Hooray! We found ${totalHits} "${q}" images.`)
 }  
 
@@ -52,11 +51,10 @@ async function galery(q, p = 1, pp = 40) {
   }
  
   if (hits.length === pp && p * pp < totalHits) {
-    console.log(galleryItems);
-    selectors.loadBtn.classList.remove('dn')
+    selectors.loadDiv.classList.remove('dn')
     return markup(hits);
 }
-   selectors.loadBtn.classList.add('dn')
+   selectors.loadDiv.classList.add('dn')
    markup(hits);
    return Notify.warning("We're sorry, but you've reached the end of search results.")
 }
@@ -83,7 +81,6 @@ function onSubmit(event) {
 
 
 function markup(arr) {
-  console.log(arr);
   
   selectors.gallery.insertAdjacentHTML('beforeend', `${arr.map(({ tags, likes, views, comments, downloads, largeImageURL, previewURL}) => `
       <div class="photo-card">
@@ -105,22 +102,21 @@ function markup(arr) {
           </p>
         </div>
       </div>`).join("")}`)
+  simple.refresh();
   
-  
-new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionPosition: 'bottom',
-        captionDelay: 250,
-        captionClass: 'caption' 
-}); 
+
 }
 
 selectors.loadBtn.addEventListener('click', onClick)
 
 function onClick() {
- 
   page += 1;
   return galery(searchWord, page)
 }
 
-
+const simple = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionPosition: 'bottom',
+        captionDelay: 250,
+        captionClass: 'caption' 
+}); 
