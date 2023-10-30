@@ -47,7 +47,7 @@ async function galery(q, p = 1, pp = 40) {
 }  
 
   if (hits.length === 0) {
-    return Notify.warning("Sorry, there are no images matching your search query. Please try again.")
+    return Notify.info("Sorry, there are no images matching your search query. Please try again.")
   }
  
   if (hits.length === pp && p * pp < totalHits) {
@@ -56,7 +56,7 @@ async function galery(q, p = 1, pp = 40) {
 }
    selectors.loadDiv.classList.add('dn')
    markup(hits);
-   return Notify.warning("We're sorry, but you've reached the end of search results.")
+   return Notify.info("We're sorry, but you've reached the end of search results.")
 }
 
 selectors.form.addEventListener('submit', onSubmit)
@@ -70,7 +70,7 @@ function onSubmit(event) {
   }
   if (query == searchWord) {
     selectors.searchInput.value = "";
-    return Notify.warning(`You are already searching for "${query}"`)
+    return Notify.info(`You are already searching for "${query}"`)
   }
   selectors.gallery.innerHTML = '';
   page = 1;
