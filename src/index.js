@@ -47,7 +47,7 @@ async function galery(q, p = 1, pp = 40) {
 }  
 
   if (hits.length === 0) {
-    return Notify.info("Sorry, there are no images matching your search query. Please try again.")
+    return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
   }
  
   if (hits.length === pp && p * pp < totalHits) {
