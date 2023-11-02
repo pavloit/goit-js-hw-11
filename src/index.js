@@ -15,19 +15,17 @@ selectors.form.addEventListener('submit', onSubmit)
 function onSubmit(event) {
   event.preventDefault();
   const query = selectors.searchInput.value
+  selectors.form.reset();
   if (!query.trim()) {
-    selectors.form.reset();
     return Notify.warning('Please enter some keyword to search images!')
   }
   if (query == searchWord) {
-    selectors.form.reset();
     return Notify.info(`You are already searching for "${query}"`)
   }
   selectors.gallery.innerHTML = '';
   selectors.loadDiv.classList.add('dn')
   page = 1;
   searchWord = query;
-  selectors.form.reset();
   return getPhoto(searchWord);
 }
 
