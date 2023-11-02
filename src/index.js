@@ -22,7 +22,6 @@ function onSubmit(event) {
   if (query == searchWord) {
     return Notify.info(`You are already searching for "${query}"`)
   }
-  selectors.gallery.innerHTML = '';
   selectors.loadDiv.classList.add('dn')
   page = 1;
   searchWord = query;

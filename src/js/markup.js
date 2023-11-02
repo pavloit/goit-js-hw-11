@@ -5,7 +5,8 @@ import { Notify } from "notiflix";
 function markup(arr, page, per_page, query, totalHits) {
   let loadmore = false;
   if (page == 1 && arr.length > 0) {
-  Notify.success(`Hooray! We found ${totalHits} "${query}" images.`)
+    Notify.success(`Hooray! We found ${totalHits} "${query}" images.`)
+    selectors.gallery.innerHTML = '';
 }  
 
   if (arr.length === 0) {
