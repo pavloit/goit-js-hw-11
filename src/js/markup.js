@@ -2,10 +2,8 @@ import { selectors } from "./selectors";
 import simpleLightbox from "simplelightbox";
 import { Notify } from "notiflix";
 
-let loadmore = false;
-
 function markup(arr, page, per_page, query, totalHits) {
-  loadmore = false;
+
   if (page == 1 && arr.length > 0) {
     Notify.success(`Hooray! We found ${totalHits} "${query}" images.`)
     selectors.gallery.innerHTML = '';
@@ -19,11 +17,7 @@ function markup(arr, page, per_page, query, totalHits) {
     return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
   }
   
-  if (arr.length === per_page && page * per_page < totalHits) {
-      loadmore = true;
-    }
-    else {
-      loadmore = false;
+  if (page * per_page >= totalHits) {
       Notify.info("We're sorry, but you've reached the end of search results.")
   }
 
@@ -48,11 +42,6 @@ function markup(arr, page, per_page, query, totalHits) {
         </div>
       </div>`).join("")}`)
   simple.refresh();
-  if (page>1 && ((page-1)*per_page >= totalHits) || arr.length === totalHits || page*per_page>totalHits) {
-    loadmore = false;
-  }
-
-  
 }
 
 const simple = new SimpleLightbox('.gallery a', {
@@ -63,4 +52,4 @@ const simple = new SimpleLightbox('.gallery a', {
 }); 
 
 
-export {markup, loadmore}
+export {markup}

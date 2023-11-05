@@ -3,10 +3,10 @@ import { selectors } from "./js/selectors";
 import { getPhoto } from "./js/pixabay";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import './css/style.css'
-import { loadmore } from "./js/markup";
 
 
-let load = loadmore;
+
+let load = false;
 let searchWord = "";
 let page = 1;
 
@@ -35,16 +35,18 @@ function onSubmit(event) {
   return getPhoto(searchWord, page);
 }
 
+
 function handleScroll() {
-  if (!l) {
+  
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+    page += 1;
+    if (page>=14) {
     return
   }
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    load = false;
-    page += 1;
     getPhoto(searchWord, page);
   }
 }
+
 
 const backToTopButton = document.getElementById('back-to-top');
 
