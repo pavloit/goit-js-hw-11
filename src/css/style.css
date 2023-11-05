@@ -6,11 +6,7 @@
 body {
     min-width: 340px;
     background-image: 
-            url("../img/flowers-g2a236f70e_1280.png");
-
-    
-        
-   
+            url("../img/flowers-g2a236f70e_1280.png");    
 }
 
 
@@ -27,11 +23,6 @@ header {
     left: 0;
     z-index: 1;
 }
-
-.header {
-    
-}
-
 
 .search-input {
     padding: 5px 40px 5px 17px;
@@ -151,16 +142,15 @@ header {
     text-shadow: 1px 1px 1px #FFF;
 }
 
-
 .caption {
     text-align: center;
     background-color: rgba(26, 24, 6, 0.399) !important;
 }
-
+/* 
 .dn {
     display: none;
-}
-
+} */
+/* 
 .load-more {
     display: block;
     margin-top: 1.25rem;
@@ -169,5 +159,38 @@ header {
     margin-bottom: 50px;
     width: 9.375rem;
     padding: .625rem;
+} */
+
+
+
+
+
+
+
+
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 70px;
+    padding: 10px;
+    transition: transform 0.5s;
+    opacity: 0;
+    transform: scale(50%) translateX(100%);
 }
 
+
+.back-to-top:hover {
+
+    transform: translateY(-10);
+}
+
+.show {
+    opacity: 1;
+    transform: translateX(0);
+}

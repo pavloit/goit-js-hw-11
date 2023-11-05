@@ -2,24 +2,31 @@ import { selectors } from "./selectors";
 import simpleLightbox from "simplelightbox";
 import { Notify } from "notiflix";
 
+let loadmore = false;
+
 function markup(arr, page, per_page, query, totalHits) {
-  let loadmore = false;
+  loadmore = false;
   if (page == 1 && arr.length > 0) {
     Notify.success(`Hooray! We found ${totalHits} "${query}" images.`)
     selectors.gallery.innerHTML = '';
+    window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
 }  
 
   if (arr.length === 0) {
     return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
   }
- 
-    if (arr.length === per_page && page * per_page < totalHits) {
+  
+  if (arr.length === per_page && page * per_page < totalHits) {
       loadmore = true;
     }
     else {
+      loadmore = false;
       Notify.info("We're sorry, but you've reached the end of search results.")
   }
-  
+
   selectors.gallery.insertAdjacentHTML('beforeend', `${arr.map(({ tags, likes, views, comments, downloads, largeImageURL, previewURL}) => `
       <div class="photo-card">
         <a class="gallery_link" href="${largeImageURL}">
@@ -41,9 +48,11 @@ function markup(arr, page, per_page, query, totalHits) {
         </div>
       </div>`).join("")}`)
   simple.refresh();
-  if (loadmore) {
-    selectors.loadDiv.classList.remove('dn');
-  }
+  // if (page>1 && ((page-1)*per_page >= totalHits) || arr.length === totalHits || page*per_page>totalHits) {
+  //   loadmore = false;
+  // }
+
+  
 }
 
 const simple = new SimpleLightbox('.gallery a', {
@@ -54,4 +63,4 @@ const simple = new SimpleLightbox('.gallery a', {
 }); 
 
 
-export {markup}
+export {markup, loadmore}
