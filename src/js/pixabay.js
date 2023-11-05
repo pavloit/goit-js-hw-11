@@ -22,7 +22,7 @@ async function getPhoto(query, page = 1) {
     }
   }
   if (page > 1 && (page - 1) * per_page >= totalHits) {
-    console.log('page: ', page, 'totalHits: ', totalHits);
+    // console.log('page: ', page, 'totalHits: ', totalHits);
     return
   }
 
