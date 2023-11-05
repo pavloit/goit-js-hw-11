@@ -6,10 +6,11 @@
 body {
     min-width: 340px;
     background-image: 
-            url("../img/road.jpeg");
+            url("../img/beach.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    background-position: center center;
 }
 
 
@@ -17,7 +18,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: deepskyblue;
+    background-color: rgba(93, 31, 137, 0.97);
     min-height: 65px;
     width: 100vw;
     min-width: 340px;
