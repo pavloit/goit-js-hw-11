@@ -6,7 +6,10 @@
 body {
     min-width: 340px;
     background-image: 
-            url("../img/flowers-g2a236f70e_1280.png");    
+            url("../img/road.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 
@@ -160,11 +163,6 @@ header {
     width: 9.375rem;
     padding: .625rem;
 } */
-
-
-
-
-
 
 
 

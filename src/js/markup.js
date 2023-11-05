@@ -8,8 +8,7 @@ function markup(arr, page, per_page, query, totalHits) {
     Notify.success(`Hooray! We found ${totalHits} "${query}" images.`)
     selectors.gallery.innerHTML = '';
     window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
+    top: 0
   });
 }  
 

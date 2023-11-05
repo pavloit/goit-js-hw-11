@@ -26,9 +26,6 @@ function onSubmit(event) {
   if (query == searchWord) {
     return Notify.info(`You are already searching for "${query}"`)
   }
-  window.scrollTo({
-    top: 0
-  });
   page = 1;
   searchWord = query;
 
