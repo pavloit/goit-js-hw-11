@@ -48,9 +48,9 @@ function markup(arr, page, per_page, query, totalHits) {
         </div>
       </div>`).join("")}`)
   simple.refresh();
-  // if (page>1 && ((page-1)*per_page >= totalHits) || arr.length === totalHits || page*per_page>totalHits) {
-  //   loadmore = false;
-  // }
+  if (page>1 && ((page-1)*per_page >= totalHits) || arr.length === totalHits || page*per_page>totalHits) {
+    loadmore = false;
+  }
 
   
 }

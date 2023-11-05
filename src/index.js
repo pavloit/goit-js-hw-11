@@ -6,7 +6,7 @@ import './css/style.css'
 import { loadmore } from "./js/markup";
 
 
-
+let load = loadmore;
 let searchWord = "";
 let page = 1;
 
@@ -17,7 +17,7 @@ window.addEventListener('scroll', handleScroll);
 function onSubmit(event) {
   event.preventDefault();
   const query = selectors.searchInput.value.trim()
-  loadmore = false;
+  load = false;
   selectors.form.reset();
 
   if (!query) {
@@ -36,11 +36,11 @@ function onSubmit(event) {
 }
 
 function handleScroll() {
-  if (!loadmore) {
+  if (!l) {
     return
   }
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    loadmore = false;
+    load = false;
     page += 1;
     getPhoto(searchWord, page);
   }
