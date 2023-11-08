@@ -44,7 +44,7 @@ function onSubmit(event) {
 
 async function startSearch(word, page) {  
   const getData = await getPhoto(word, page)
-  hits = getData.data.hits;
+  const hits = getData.data.hits;
   totalHits = getData.data.totalHits;
 
   if (totalHits === 0) {

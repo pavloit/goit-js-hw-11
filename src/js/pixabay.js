@@ -1,5 +1,4 @@
 import axios from "axios";
-import { markup } from "./markup";
 
 const API_KEY = '40310679-7bde47196eb03c19dd1299faf';
 axios.defaults.baseURL = 'https://pixabay.com/api/';
@@ -19,7 +18,7 @@ async function getPhoto(query, page = 1) {
       'Content-Type': 'application/json',
     }
   }
-
+  
     return await axios.get('', settings)
 }
 
