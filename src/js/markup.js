@@ -1,24 +1,7 @@
 import { selectors } from "./selectors";
-import simpleLightbox from "simplelightbox";
-import { Notify } from "notiflix";
 
-function markup(arr, page, per_page, query, totalHits) {
 
-  if (page == 1 && arr.length > 0) {
-    Notify.success(`Hooray! We found ${totalHits} "${query}" images.`)
-    selectors.gallery.innerHTML = '';
-    window.scrollTo({
-    top: 0
-  });
-}  
-
-  if (arr.length === 0) {
-    return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
-  }
-  
-  if (page * per_page >= totalHits) {
-      Notify.info("We're sorry, but you've reached the end of search results.")
-  }
+function markup(arr) {
 
   selectors.gallery.insertAdjacentHTML('beforeend', `${arr.map(({ tags, likes, views, comments, downloads, largeImageURL, previewURL}) => `
       <div class="photo-card">
@@ -40,15 +23,6 @@ function markup(arr, page, per_page, query, totalHits) {
           </p>
         </div>
       </div>`).join("")}`)
-  simple.refresh();
 }
-
-const simple = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionPosition: 'bottom',
-        captionDelay: 250,
-        captionClass: 'caption' 
-}); 
-
 
 export {markup}
